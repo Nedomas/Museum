@@ -5,24 +5,25 @@
 	<% @history_data.each do |symbol, data| %>
 		<p><%= symbol %></p>
 		<table class="table">
-		<tr>
-			<th>date</th>
-			<th>open</th>
-			<th>high</th>
-			<th>low</th>
-			<th>close</th>
-			<th>volume</th>
-			<th>adjusted close</th>
-		</tr>
-		<% data.each do |row| %>
-		<tr>
-			<% row.each do |column, value| %>
-			<td>
-				<%= value %>
-			</td>
+		<% data.each_with_index do |row, index| %>
+			<% if index == 0 %>
+			<tr>
+				<% row.each_key do |key| %>
+					<th>
+						<%= key %>
+					</th>
+				<% end %>
 			<% end %>
-		</tr>
+			</tr>
+			<tr>
+				<% row.each do |column, value| %>
+					<td>
+						<%= value %>
+					</td>
+				<% end %>
+			</tr>
 		<% end %>
 		</table>
 	<% end %>
 <% end %>
+<%= debug(params) if Rails.env.development? %>

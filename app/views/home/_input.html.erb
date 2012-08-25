@@ -1,7 +1,8 @@
 <%= form_tag(home_output_path, :method => "get", :remote => :true) do %>
   <%= text_field_tag :symbols, nil, :class => "input-xxlarge", :placeholder => "symbols seperated with spaces" %>
-  <%= text_field_tag :start_date, nil, :type => "date", :placeholder => "start date" %>
-  <%= text_field_tag :end_date, nil, :class => "date", :placeholder => "end date" %>
+  <%= text_field_tag :start_date, Date.today - 31, :type => "date", :placeholder => "start date" %>
+  <%= text_field_tag :end_date, Date.today, :class => "date", :placeholder => "end date" %>
+  <%= select_tag :periods, "<option>daily</option><option>weekly</option><option>monthly</option><option>dividends</option>".html_safe %>
   <br>
   <!-- TODO: Add loading animation to the button -->
   <%= submit_tag "Results", :class => "btn btn-large btn-block btn-primary"%>

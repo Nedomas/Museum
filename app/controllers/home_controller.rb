@@ -11,8 +11,9 @@ class HomeController < ApplicationController
 	  	input_symbols = params[:symbols].split(" ")
 	  	start_date = params[:start_date]
 	  	end_date = params[:end_date]
+	  	periods = params[:periods].to_sym
 	  	symbols = Securities::Stock.new(input_symbols)
-			@history_data = symbols.history(:start_date => start_date, :end_date => end_date).results
+			@history_data = symbols.history(:start_date => start_date, :end_date => end_date, :periods => periods).results
 
 		rescue Exception => exc
    		flash.now[:notice] = "#{exc.message}"
