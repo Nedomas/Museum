@@ -1,7 +1,10 @@
 <%= form_tag(home_output_path, :method => "get", :remote => :true) do %>
   <%= text_field_tag :symbols, nil, :class => "input-xxlarge", :placeholder => "symbols seperated with spaces" %>
+  <%= text_field_tag :start_date, nil, :type => "date", :placeholder => "start date" %>
+  <%= text_field_tag :end_date, nil, :class => "date", :placeholder => "end date" %>
   <br>
-  <%= submit_tag "Results", :class => "btn btn-large btn-block btn-primary" %>
+  <!-- TODO: Add loading animation to the button -->
+  <%= submit_tag "Results", :class => "btn btn-large btn-block btn-primary"%>
 <% end %>
 <!-- TODO: find alternative to make "Clean" button work with ajax -->
 <%= button_to "Clean", root_url, :class => "btn btn-warning"%>
