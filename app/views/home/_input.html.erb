@@ -1,6 +1,7 @@
 <%= form_tag(home_output_path, :method => "get", :remote => :true) do %>
-  <%= text_field_tag :symbols, nil, :placeholder => "symbols seperated with spaces" %>
-  <%= submit_tag "Results", :class => "btn btn-primary" %>
+  <%= text_field_tag :symbols, nil, :class => "input-xxlarge", :placeholder => "symbols seperated with spaces" %>
+  <br>
+  <%= submit_tag "Results", :class => "btn btn-large btn-block btn-primary" %>
 <% end %>
 <!-- TODO: find alternative to make "Clean" button work with ajax -->
 <%= button_to "Clean", root_url, :class => "btn btn-warning"%>

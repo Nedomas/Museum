@@ -1,3 +1,6 @@
+<% if flash[:notice] %>
+	<div class="alert alert-error"><%= flash[:notice] %></div>
+<% end %>
 <% unless @history_data.nil? %>
 	<% @history_data.each do |symbol, data| %>
 		<p><%= symbol %></p>
@@ -22,7 +25,4 @@
 		<% end %>
 		</table>
 	<% end %>
-
-<% else %>
-	<p>No symbols specified.</p>
 <% end %>
