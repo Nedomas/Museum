@@ -1,0 +1,28 @@
+<% unless @history_data.nil? %>
+	<% @history_data.each do |symbol, data| %>
+		<p><%= symbol %></p>
+		<table class="table">
+		<tr>
+			<th>date</th>
+			<th>open</th>
+			<th>high</th>
+			<th>low</th>
+			<th>close</th>
+			<th>volume</th>
+			<th>adjusted close</th>
+		</tr>
+		<% data.each do |row| %>
+		<tr>
+			<% row.each do |column, value| %>
+			<td>
+				<%= value %>
+			</td>
+			<% end %>
+		</tr>
+		<% end %>
+		</table>
+	<% end %>
+
+<% else %>
+	<p>No symbols specified.</p>
+<% end %>

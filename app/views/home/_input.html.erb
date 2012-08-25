@@ -1,0 +1,5 @@
+<%= form_tag(home_output_path, :method => "get") do %>
+  <%= text_field_tag :symbols, nil, :placeholder => "symbols" %>
+  <%= submit_tag "Results", :class => "btn btn-primary" %>
+  <%= submit_tag "Clean", :class => "btn btn-warning" %>
+<% end %>
