@@ -17,12 +17,14 @@ class HomeController < ApplicationController
 
 		rescue Exception => exc
    		flash.now[:error] = "#{exc.message}"
+    else
+      empty_symbols = []
+      @history_data.each { |symbol, value| empty_symbols << symbol if value.empty?
+        flash.now[:warning] = "There were no results for #{empty_symbols.join(", ")}." unless empty_symbols.empty?
+      }
    	end
 
     # If symbol doesn't exist or returned no results from securities.
-    empty_symbols = []
-    @history_data.each { |symbol, value| empty_symbols << symbol if value.empty? }
-    flash.now[:warning] = "There were no results for #{empty_symbols.join(", ")}." unless empty_symbols.empty?
 
 		respond_to do |format|
       format.html
