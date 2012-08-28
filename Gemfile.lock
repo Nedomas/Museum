@@ -1,3 +1,9 @@
+PATH
+  remote: ~/Sites/Gems/ta
+  specs:
+    ta (0.0.2)
+      rails
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -128,4 +134,5 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 3.2.3)
   securities (~> 0.1.2)
+  ta!
   uglifier (>= 1.0.3)

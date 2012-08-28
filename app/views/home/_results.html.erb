@@ -15,6 +15,11 @@
 						<%= key %>
 					</th>
 				<% end %>
+				<% unless @indicator_data.nil? %>
+					<th>
+						SMA
+					</th>
+				<% end %>
 			<% end %>
 			</tr>
 			<tr>
@@ -22,6 +27,11 @@
 					<td>
 						<%= value %>
 					</td>
+				<% end %>
+				<% unless @indicator_data.nil? %>
+				<td>
+					<%= @indicator_data[symbol][index] %>
+				</td>
 				<% end %>
 			</tr>
 		<% end %>
