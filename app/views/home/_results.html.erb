@@ -16,9 +16,19 @@
 					</th>
 				<% end %>
 				<% unless @indicator_data.nil? %>
-					<th>
-						<%= @type %>
-					</th>
+
+					<% if @indicator_name.is_a?(Array) %>
+						<% @indicator_name.each do |name| %>
+							<th>
+								<%= name %>
+							</th>
+						<% end %>
+					<% else %>
+						<th>
+							<%= @indicator_name %>
+						</th>
+					<% end %>
+
 				<% end %>
 			<% end %>
 			</tr>
@@ -29,9 +39,19 @@
 					</td>
 				<% end %>
 				<% unless @indicator_data.nil? %>
-				<td>
-					<%= @indicator_data[symbol][index] %>
-				</td>
+
+					<% if @indicator_data[symbol][index].is_a?(Array) %>
+							<% @indicator_data[symbol][index].each do |data| %>
+								<td>
+									<%= data %>
+								</td>
+							<% end %>
+						<% else %>
+							<td>
+								<%= @indicator_data[symbol][index] %>
+							</td>
+					<% end %>
+
 				<% end %>
 			</tr>
 		<% end %>

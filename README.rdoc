@@ -1,5 +1,5 @@
 == Museum
 
-Implementation testing for securities and technical_analysis gems.
+Implementation testing for securities and ta gems.
 
 Found at http://strangemuseum.heroku.com

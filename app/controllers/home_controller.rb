@@ -14,10 +14,15 @@ class HomeController < ApplicationController
 	  	periods = params[:periods].to_sym
 	  	symbols = Securities::Stock.new(input_symbols)
 			@history_data = symbols.history(:start_date => start_date, :end_date => end_date, :periods => periods).results
-      @type = params[:type].to_sym
-      variables = params[:variables].to_i
-      unless @type == :none
-        @indicator_data = Ta::Data.new(@history_data).calc(:type => @type, :variables => variables)
+      type = params[:type].to_sym
+      variables = params[:variables].split(" ")
+      unless type == :none
+        @indicator_data = Ta::Data.new(@history_data).calc(:type => type, :variables => variables)
+        if type == :bb
+          @indicator_name = ["middle band", "upper band", "lower band"]
+        else 
+          @indicator_name = type
+        end
       end
 
 		rescue Exception => exc
