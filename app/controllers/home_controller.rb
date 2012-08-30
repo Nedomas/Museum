@@ -20,6 +20,8 @@ class HomeController < ApplicationController
         @indicator_data = Ta::Data.new(@history_data).calc(:type => type, :variables => variables)
         if type == :bb
           @indicator_name = ["middle band", "upper band", "lower band"]
+        elsif type == :macd
+          @indicator_name = ["macd line", "signal line", "macd histogram"]
         else 
           @indicator_name = type
         end

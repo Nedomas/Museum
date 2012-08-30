@@ -43,12 +43,13 @@
 					<% if @indicator_data[symbol][index].is_a?(Array) %>
 							<% @indicator_data[symbol][index].each do |data| %>
 								<td>
-									<%= data %>
+									<%= data.round(3) unless @indicator_data[symbol][index].nil? %>
 								</td>
 							<% end %>
-						<% else %>
+					<% else %>
 							<td>
-								<%= @indicator_data[symbol][index] %>
+								<!-- Got to find out this problem. -->
+								<%= @indicator_data[symbol][index].round(3) unless @indicator_data[symbol][index].nil? %>
 							</td>
 					<% end %>
 
