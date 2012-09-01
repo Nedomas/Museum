@@ -3,7 +3,7 @@
   <%= text_field_tag :start_date, Date.today - 3.month, :type => "date", :placeholder => "start date" %>
   <%= text_field_tag :end_date, Date.today, :class => "date", :placeholder => "end date" %>
   <%= select_tag :periods, "<option>daily</option><option>weekly</option><option>monthly</option><option>dividends</option>".html_safe %>
-  <%= select_tag :type, "<option>none</option><option>sma</option><option>ema</option><option>bb</option><option>macd</option>".html_safe %>
+  <%= select_tag :type, "<option>none</option><option>sma</option><option>ema</option><option>bb</option><option>macd</option><option>rsi</option>".html_safe %>
   <%= text_field_tag :variables, 15, :placeholder => "parameters seperated with space (i.e. 20 2 for BB; 12 26 9 for MACD)" %>
   <br>
   <!-- TODO: Add loading animation to the button -->

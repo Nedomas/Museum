@@ -7,7 +7,7 @@ gem 'rails', '3.2.8'
 
 gem 'pg'
 gem 'securities', '~> 0.1.2'
-gem 'ta'
+gem 'indicators'
 gem 'bootstrap-sass'
 
 
