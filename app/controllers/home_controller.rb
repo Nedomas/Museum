@@ -22,6 +22,8 @@ class HomeController < ApplicationController
           @indicator_name = ["middle band", "upper band", "lower band"]
         elsif type == :macd
           @indicator_name = ["macd line", "signal line", "macd histogram"]
+        elsif type == :sto
+          @indicator_name = ["fast %K", "slow %K", "full %D"]
         else 
           @indicator_name = type
         end
