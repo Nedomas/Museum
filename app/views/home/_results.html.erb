@@ -5,7 +5,7 @@
 <% end %>
 <% unless @history_data.nil? %>
 	<% @history_data.each do |symbol, data| %>
-		<p><%= symbol %></p>
+		<p><%= symbol.upcase %></p>
 		<table class="table">
 		<% data.reverse.each_with_index do |row, index| %>
 			<% if index == 0 %>
@@ -15,8 +15,8 @@
 						<%= key %>
 					</th>
 				<% end %>
-				<% unless @indicator_data.nil? %>
-
+				<% unless @indicator_output.nil? %>
+				<p align="right"><%= @indicator_abbr %> with parameters: <%= @indicator_params %></p>
 					<% if @indicator_name.is_a?(Array) %>
 						<% @indicator_name.each do |name| %>
 							<th>
@@ -38,10 +38,10 @@
 						<%= value %>
 					</td>
 				<% end %>
-				<% unless @indicator_data.nil? %>
+				<% unless @indicator_output.nil? %>
 
-					<% if @indicator_data[symbol][index].is_a?(Array) %>
-							<% @indicator_data[symbol][index].each do |data| %>
+					<% if @indicator_output[symbol][index].is_a?(Array) %>
+							<% @indicator_output[symbol][index].each do |data| %>
 								<td>
 									<%= data.round(3) unless data.nil? %>
 								</td>
@@ -49,7 +49,7 @@
 					<% else %>
 							<td>
 								<!-- Got to find out this problem. -->
-								<%= @indicator_data[symbol][index].round(3) unless @indicator_data[symbol][index].nil? %>
+								<%= @indicator_output[symbol][index].round(3) unless @indicator_output[symbol][index].nil? %>
 							</td>
 					<% end %>
 

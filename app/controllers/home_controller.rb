@@ -17,7 +17,10 @@ class HomeController < ApplicationController
       type = params[:type].to_sym
       variables = params[:variables].split(" ")
       unless type == :none
-        @indicator_data = Indicators::Data.new(@history_data).calc(:type => type, :variables => variables)
+        indicator_data = Indicators::Data.new(@history_data).calc(:type => type, :params => variables)
+        @indicator_output = indicator_data.output
+        @indicator_abbr = indicator_data.abbr
+        @indicator_params = indicator_data.params
         if type == :bb
           @indicator_name = ["middle band", "upper band", "lower band"]
         elsif type == :macd
