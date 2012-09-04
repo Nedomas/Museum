@@ -7,7 +7,7 @@
 	<% @history_data.each do |symbol, data| %>
 		<p><%= symbol.upcase %></p>
 		<table class="table">
-		<% data.reverse.each_with_index do |row, index| %>
+		<% data.each_with_index do |row, index| %>
 			<% if index == 0 %>
 			<tr>
 				<% row.each_key do |key| %>

@@ -13,7 +13,7 @@ class HomeController < ApplicationController
 	  	end_date = params[:end_date]
 	  	periods = params[:periods].to_sym
 	  	symbols = Securities::Stock.new(input_symbols)
-			@history_data = symbols.history(:start_date => start_date, :end_date => end_date, :periods => periods).results
+			@history_data = symbols.history(:start_date => start_date, :end_date => end_date, :periods => periods)
       type = params[:type].to_sym
       variables = params[:variables].split(" ")
       unless type == :none
