@@ -4,59 +4,62 @@
 	<div class="alert"><%= flash[:warning] %></div>
 <% end %>
 <% unless @history_data.nil? %>
-	<% @history_data.each do |symbol, data| %>
-		<p><%= symbol.upcase %></p>
-		<table class="table">
-		<% data.each_with_index do |row, index| %>
+	<p><%= @symbol.upcase %></p>
+	<table class="table">
+		<% @history_data.each_with_index do |row, index| %>
 			<% if index == 0 %>
-			<tr>
-				<% row.each_key do |key| %>
-					<th>
-						<%= key %>
-					</th>
-				<% end %>
-				<% unless @indicator_output.nil? %>
-				<p align="right"><%= @indicator_abbr %> with parameters: <%= @indicator_params %></p>
-					<% if @indicator_name.is_a?(Array) %>
-						<% @indicator_name.each do |name| %>
-							<th>
-								<%= name %>
-							</th>
-						<% end %>
-					<% else %>
+				<!-- Header line -->
+				<tr>
+					<% row.each_key do |key| %>
 						<th>
-							<%= @indicator_name %>
+							<%= key %>
 						</th>
 					<% end %>
+					<% unless @indicator_output.nil? %>
 
-				<% end %>
+						<p align="right"><%= @indicator_abbr %> with parameters: <%= @indicator_params %></p>
+						<% if @indicator_name.is_a?(Array) %>
+							<% @indicator_name.each do |name| %>
+								<th>
+									<%= name %>
+								</th>
+							<% end %>
+						<% else %>
+							<th>
+								<%= @indicator_name %>
+							</th>
+						<% end %>
+
+					<% end %>
+				</tr>
+
 			<% end %>
-			</tr>
+
 			<tr>
 				<% row.each do |column, value| %>
 					<td>
 						<%= value %>
 					</td>
 				<% end %>
+
 				<% unless @indicator_output.nil? %>
 
-					<% if @indicator_output[symbol][index].is_a?(Array) %>
-							<% @indicator_output[symbol][index].each do |data| %>
+						<% if @indicator_output[index].is_a?(Array) %>
+								<% @indicator_output[index].each do |data| %>
+									<td>
+										<%= data.round(3) unless data.nil? %>
+									</td>
+								<% end %>
+						<% else %>
 								<td>
-									<%= data.round(3) unless data.nil? %>
+									<%= @indicator_output[index].round(3) unless @indicator_output[index].nil? %>
 								</td>
-							<% end %>
-					<% else %>
-							<td>
-								<!-- Got to find out this problem. -->
-								<%= @indicator_output[symbol][index].round(3) unless @indicator_output[symbol][index].nil? %>
-							</td>
-					<% end %>
+						<% end %>
 
 				<% end %>
+
 			</tr>
 		<% end %>
-		</table>
-	<% end %>
+	</table>
 <% end %>
 <%= debug(params) if Rails.env.development? %>
