@@ -7,16 +7,27 @@ class HomeController < ApplicationController
   end
 
   def output
-  	begin
-	  	input_symbol = params[:symbol]
-      @symbol = input_symbol
-	  	start_date = params[:start_date]
-	  	end_date = params[:end_date]
-	  	type = params[:type].to_sym
-			@history_data = Securities::Stock.new(:symbol => input_symbol, :start_date => start_date, :end_date => end_date, :type => type).output
-      indicator = params[:indicator].to_sym
-      variables = params[:variables].split(" ")
-      @lookup = Securities::Lookup.new(input_symbol).output[0]
+  	input_symbol = params[:symbol]
+  	start_date = params[:start_date]
+  	end_date = params[:end_date]
+  	type = params[:type].to_sym
+    indicator = params[:indicator].to_sym
+    variables = params[:variables].split(" ")
+    begin
+      begin
+  		  @history_data = Securities::Stock.new(:symbol => input_symbol, :start_date => start_date, :end_date => end_date, :type => type).output
+        @symbol = input_symbol
+        @lookup = Securities::Lookup.new(@symbol).output[0]
+      rescue Exception => exc
+        if exc.message == 'Stock symbol does not exist.'
+          @lookup = Securities::Lookup.new(input_symbol).output[0]
+          @symbol = @lookup[:symbol]
+          @history_data = Securities::Stock.new(:symbol => @symbol, :start_date => start_date, :end_date => end_date, :type => type).output
+          flash.now[:warning] = "'#{input_symbol}' does not exist. Did you mean #{@symbol}?"
+        else
+          flash.now[:error] = "#{exc.message}"
+        end
+      end
       unless indicator == :none
         indicator_data = Indicators::Data.new(@history_data).calc(:type => indicator, :params => variables)
         @indicator_output = indicator_data.output
@@ -32,10 +43,9 @@ class HomeController < ApplicationController
           @indicator_name = indicator
         end
       end
-
-		rescue Exception => exc
-   		flash.now[:error] = "#{exc.message}"
-   	end
+    rescue Exception => exc
+      flash.now[:error] = "#{exc.message}"
+    end
 
     # If symbol doesn't exist or returned no results from securities.
 
