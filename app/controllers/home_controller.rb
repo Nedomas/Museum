@@ -24,8 +24,6 @@ class HomeController < ApplicationController
           @symbol = @lookup[:symbol]
           @history_data = Securities::Stock.new(:symbol => @symbol, :start_date => start_date, :end_date => end_date, :type => type).output
           flash.now[:warning] = "'#{input_symbol}' does not exist. Did you mean #{@symbol}?"
-        else
-          flash.now[:error] = "#{exc.message}"
         end
       end
       unless indicator == :none
@@ -44,7 +42,13 @@ class HomeController < ApplicationController
         end
       end
     rescue Exception => exc
-      flash.now[:error] = "#{exc.message}"
+      if exc.message == 'There were no results for this lookup.'
+        flash.now[:error] = "Stock symbol does not exist and a query for similar symbols returned nothing."
+      elsif exc.message == 'Stock symbol does not exist.'
+        flash.now[:error] = "Yahoo Finance does not provide history data for this symbol."
+      else
+        flash.now[:error] = "#{exc.message}"
+      end
     end
 
     # If symbol doesn't exist or returned no results from securities.

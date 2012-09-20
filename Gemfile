@@ -6,8 +6,8 @@ gem 'rails', '3.2.8'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
-gem 'securities', :path => '~/Sites/Gems/securities'
-gem 'indicators', :path => '~/Sites/Gems/indicators'
+gem 'securities', ">= 2.0.0", "< 3.0.0"
+gem 'indicators', ">= 1.0.0", "< 2.0.0"
 gem 'bootstrap-sass'
 
 
