@@ -13,21 +13,27 @@ class HomeController < ApplicationController
   	type = params[:type].to_sym
     indicator = params[:indicator].to_sym
     variables = params[:variables].split(" ")
+    @query = Array.new
     begin
       begin
   		  @history_data = Securities::Stock.new(:symbol => input_symbol, :start_date => start_date, :end_date => end_date, :type => type).output
+        @query << "history_data = Securities::Stock.new(:symbol => '#{input_symbol}', :start_date => '#{start_date}', :end_date => '#{end_date}', :type => :#{type}).output"
         @symbol = input_symbol
         @lookup = Securities::Lookup.new(@symbol).output[0]
+        @query << "Securities::Lookup.new('#{@symbol}').output[0]"
       rescue Exception => exc
         if exc.message == 'Stock symbol does not exist.'
           @lookup = Securities::Lookup.new(input_symbol).output[0]
           @symbol = @lookup[:symbol]
+          @query << "lookup = Securities::Lookup.new('#{@symbol}').output[0]"
           @history_data = Securities::Stock.new(:symbol => @symbol, :start_date => start_date, :end_date => end_date, :type => type).output
           flash.now[:warning] = "'#{input_symbol}' does not exist. Did you mean #{@symbol}?"
+          @query << "history_data = Securities::Stock.new(:symbol => '#{@symbol}', :start_date => '#{start_date}', :end_date => '#{end_date}', :type => :#{type}).output"
         end
       end
       unless indicator == :none
         indicator_data = Indicators::Data.new(@history_data).calc(:type => indicator, :params => variables)
+        @query << "Indicators::Data.new(history_data).calc(:type => :#{indicator}, :params => #{variables})"
         @indicator_output = indicator_data.output
         @indicator_abbr = indicator_data.abbr
         @indicator_params = indicator_data.params

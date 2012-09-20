@@ -4,6 +4,10 @@
 	<div class="alert"><%= flash[:warning] %></div>
 <% end %>
 <% unless @history_data.nil? %>
+	Query DSL used:<br>
+	<% @query.each do |z| %>
+		<code><%=	z %></code><br>
+	<% end %>
 	<p><%= "#{@lookup[:name]} [#{@lookup[:type].downcase} symbol #{@symbol.upcase}], industry - #{@lookup[:industry_category]}, exchange - #{@lookup[:exchange]}." %></p>
 	<table class="table">
 		<% @history_data.each_with_index do |row, index| %>

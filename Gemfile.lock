@@ -124,7 +124,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bootstrap-sass
+  bootstrap-sass (~> 2.1)
   coffee-rails (~> 3.2.1)
   indicators (>= 1.0.0, < 2.0.0)
   jquery-rails

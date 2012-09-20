@@ -1,9 +1,13 @@
 == Museum
 
-Implementation testing for securities and ta gems.
+Implementation testing for Securities and Indicators gems.
 
 Found at http://strangemuseum.heroku.com
+
+Securities gem: https://rubygems.org/gems/securities
+Indicators gem: https://rubygems.org/gems/indicators
 
 == To Do
 
 * Fix design bugs
+* Add loading animation
